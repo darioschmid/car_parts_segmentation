@@ -1,0 +1,85 @@
+{
+  "name": "Unet",
+  "n_gpu": 1,
+  "train_pictures": 0,
+  "arch": {
+    "spaceholder_type": "Pix2PixModel",
+    "spaceholder_args": {
+      "gf_dim": 10,
+      "df_dim": 64,
+      "c_dim": 3
+    },
+    "type": "Unet",
+    "args": {
+      "n_channels": 3,
+      "n_classes": 10,
+      "bilinear": false
+    }
+  },
+  "data_loader": {
+    "type": "CarsDataLoader",
+    "args": {
+      "data_dir": "./test_data/train/arrays",
+      "batch_size": 2,
+      "shuffle": true,
+      "validation_split": 0.1,
+      "num_workers": 2
+    }
+  },
+  "optimizer": {
+    "type": "RMSprop",
+    "resume": false,
+    "args": {
+      "lr": 1e-5,
+      "weight_decay": 1e-4,
+      "momentum": 0.9,
+      "foreach": true
+    }
+  },
+  "loss": {
+    "type": "BCE_Loss",
+    "args": {
+    }
+  },
+  "weight": [
+    0.1,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    0.1
+  ],
+  "metrics": [
+    "accuracy",
+    "car_part_accuracy"
+  ],
+  "lr_scheduler": {
+    "type": "ReduceLROnPlateau",
+    "args": {
+      "mode": "min",
+      "factor": 0.1,
+      "patience": 5,
+      "verbose": false,
+      "threshold": 0.0001,
+      "threshold_mode": "rel",
+      "cooldown": 0,
+      "min_lr": 0,
+      "eps": 1e-08
+    }
+  },
+  "trainer": {
+    "type": "Normal",
+    "spaceholder_type": "GAN",
+    "epochs": 40,
+    "save_dir": "saved/",
+    "save_period": 10,
+    "verbosity": 2,
+    "monitor": "min val_loss",
+    "early_stop": 10,
+    "tensorboard": true
+  }
+}
