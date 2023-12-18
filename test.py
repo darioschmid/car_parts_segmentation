@@ -79,8 +79,8 @@ def main(config):
             data, target = data.to(device), target.to(device)
             output = model(data)
 
-            foreground_output = color_image(output[0].detach().numpy())
-            foreground_target = color_image(target[0].detach().numpy())
+            foreground_output = color_image(output[0].cpu().detach().numpy())
+            foreground_target = color_image(target[0].cpu().detach().numpy())
             background = convert_png_transparent(
                 Image.fromarray(np.load(f"./test_set/photo_{i + 1:04d}.npy"))).convert("RGBA")
             background_target = convert_png_transparent(
@@ -100,7 +100,7 @@ def main(config):
             ax1.imshow(background)
             ax2.imshow(background_target)
 
-            plt.savefig(f'./images/test/{str(i)}')
+            plt.savefig(f'/content/car_parts_segmentation/images/test/{str(i)}')
             plt.close()
 
             # computing loss, metrics on test set

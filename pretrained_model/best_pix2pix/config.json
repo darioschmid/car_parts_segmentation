@@ -19,7 +19,7 @@
     "data_loader": {
         "type": "CarsDataLoader",
         "args": {
-            "data_dir": "./data/augmented_real_photos/test",
+            "data_dir": "./test_set",
             "batch_size": 16,
             "shuffle": true,
             "validation_split": 0.1,
