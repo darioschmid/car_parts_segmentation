@@ -1,9 +1,3 @@
-# Data_explanation notebook
-...
-
-# Detectron2_Tutorial notebook
-...
-
 # Training_notebook
 The training_notebook is training one of our two architectures (U-Net or Pix2Pix) on one image to illustrate our training pipeline and shows the results in tensorboard. 
 
